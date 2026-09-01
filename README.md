@@ -22,5 +22,8 @@ python src/chat.py
 ```
 
 ---  
-
-Obs: O chat pode ser terminado com um dos três comandos: **"sair", "exit", "quit"**
+  
+  
+Obs: 
+ - Para facilitar a configuração de execução da aplicação foram mantidas as senhas dentro do arquivo docker-compose e dentro do ingest.
+ - O chat pode ser terminado com um dos três comandos: **"sair", "exit", "quit"**
