@@ -19,10 +19,6 @@ def ingest_pdf():
     
     loader = PyPDFLoader(PDF_PATH)
     documents = loader.load()
-    
-    # Here you can process the documents as needed
-    # for doc in documents:
-    #     print(doc.page_content)  # Example: print the content of each page
 
     return documents
 
@@ -34,11 +30,9 @@ def chunk_documents(documents, chunk_size=1000, chunk_overlap=150):
     return text_splitter.split_documents(documents)
 
 def generate_embeddings():
-    # return GoogleGenerativeAIEmbeddings(model="gemini-embedding-001")
     return OpenAIEmbeddings(model="text-embedding-3-small")
 
 def store_embeddings_in_db(embeddings, chunked_documents):
-    # 4. Vector Store
     vector_store = PGVector(
         embeddings=embeddings,
         collection_name="documents",
@@ -46,13 +40,11 @@ def store_embeddings_in_db(embeddings, chunked_documents):
         use_jsonb=True,
     )
 
-    # 5. Ingestão
     vector_store.add_documents(chunked_documents)
 
 if __name__ == "__main__":
     documents = ingest_pdf()
     chunked_documents = chunk_documents(documents)
-    # generate embeddings and store them in the database as needed
     embeddings = generate_embeddings()
 
     store_embeddings_in_db(embeddings, chunked_documents)
